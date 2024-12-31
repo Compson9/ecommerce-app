@@ -3,7 +3,7 @@
 import { ClerkLoaded, SignInButton, UserButton, useUser } from "@clerk/nextjs"
 import Link from "next/link";
 import Form from "next/form";
-import { PackageIcon, SearchIcon, TrolleyIcon } from "@sanity/icons";
+import { PackageIcon,  TrolleyIcon } from "@sanity/icons";
 import { SignedIn } from "@clerk/clerk-react";
 
 
@@ -74,7 +74,10 @@ export default function Header() {
               </div>
             </div>
            ): (
-            <SignInButton mode="modal"/>
+            <div className="text-white font-semibold">
+               <SignInButton   mode="modal"/>
+            </div>
+           
            )}
            {/* User Pass Key */}
           {/* {user?.passkeys.length === 0 && (
