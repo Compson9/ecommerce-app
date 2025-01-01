@@ -1,9 +1,19 @@
-import React from 'react'
 
-export default function SearchPage() {
+export default async function SearchPage({
+    searchParams,
+}: {
+    searchParams: {
+        query: string
+    }
+}
+) {
+    const {query} = await searchParams;
+    
+
+    
   return (
     <div className='pt-20'>
-        <h2>The search page is here</h2>
-        page</div>
+        <h2>Searched Page for {query}</h2>
+        </div>
   )
 }
