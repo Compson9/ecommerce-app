@@ -1,7 +1,7 @@
 import { TrolleyIcon } from "@sanity/icons"
 import { defineField, defineType } from "sanity"
 
-export const ProductType = defineType ({
+export const ProductType = defineType({
     name: 'product',
     title: 'Products',
     type: 'document',
@@ -20,41 +20,41 @@ export const ProductType = defineType ({
             options: {
                 source: "name",
             },
-            validation: (Rule) => Rule.required(),   
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: "shortDescription",
+            title: "Short Description",
+            type: "text",
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: "image",
+            title: "Product Image",
+            type: "image",
+            options: {
+                hotspot: true,
+            },
         }),
         defineField({
             name: "description",
             title: "Description",
-            type: "text",
+            type: "blockContent",
             validation: (Rule) => Rule.required(),
         }),
-    defineField({
-        name: "image",
-        title: "Product Image",
-        type: "image",
-        options: {
-            hotspot: true,
-        },
-    }),
-    defineField({
-        name: "description",
-        title: "Description",
-        type: "blockContent",
-        validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-        name: "price",
-        title: "Price",
-        type: "number",
-        validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-        name: "categories",
-        title: "Categories",
-        type: "array",
-        of: [{ type: "reference", to: { type: "category" } }],
-        validation: (Rule) => Rule.required(),
-    }),
+        defineField({
+            name: "price",
+            title: "Price",
+            type: "number",
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+            name: "categories",
+            title: "Categories",
+            type: "array",
+            of: [{ type: "reference", to: { type: "category" } }],
+            validation: (Rule) => Rule.required(),
+        }),
     ],
     preview: {
         select: {
@@ -70,5 +70,4 @@ export const ProductType = defineType ({
             }
         }
     },
-
 })
