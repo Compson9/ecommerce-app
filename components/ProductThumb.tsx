@@ -37,8 +37,10 @@ export default function ProductThumb({ product }: { product: Product }) {
           {product.name}
         </h2>
         <p className='mt-2 text-sm text-gray-600 line-clamp-2'>
-            {product.description?.map((block)=> block._type === "block" ? block.children)}
-
+            {product.description?.map((block)=> block._type === "block" ? block.children?.map((child)=> child.text).join(""): "").join("") || "No description"}
+        </p>
+        <p className='mt-2 text-lg font-bold text-gray-900'>
+            ${product.price?.toFixed(2)}
         </p>
         </div>
       </Link>
