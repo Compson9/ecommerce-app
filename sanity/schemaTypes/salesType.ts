@@ -38,7 +38,27 @@ defineField({
     title: "Valid Until",
     type: "datetime",
 }),
-
-
-    ]
+defineField({
+    name: "isActive",
+    title: "Is Active",
+    type: "boolean",
+    description: "Toggle to activate or deactivate",
+}),
+    ],
+    preview: {
+        select: {
+            title: "title", 
+            discountAmount: "discountAmount",
+            couponCode: "couponCode",
+            isActive: "isActive",
+        },
+        prepare(selection){
+            const {title, discountAmount, couponCode, isActive} = selection;
+            const status = isActive ? "Active" : "Inactive";
+            return {
+                title,
+                subtitle: `${discountAmount}% off - Code: ${couponCode} - ${status}`
+            }
+        }
+    }
 })

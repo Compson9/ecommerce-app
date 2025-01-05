@@ -23,12 +23,6 @@ export const ProductType = defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: "shortDescription",
-            title: "Short Description",
-            type: "text",
-            validation: (Rule) => Rule.required(),
-        }),
-        defineField({
             name: "image",
             title: "Product Image",
             type: "image",
@@ -55,6 +49,12 @@ export const ProductType = defineType({
             of: [{ type: "reference", to: { type: "category" } }],
             validation: (Rule) => Rule.required(),
         }),
+        defineField({
+            name: "stock",
+            title: "Stock",
+            type: "number",
+            validation: (Rule) => Rule.required(),
+        })
     ],
     preview: {
         select: {

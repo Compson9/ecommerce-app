@@ -28,7 +28,7 @@ fields : [
     defineField({
         name: "clerkUserId",
         title: "Store User ID",
-        type: "sting",
+        type: "string",
         validation: (Rule) => Rule.required(),
      }),
      defineField({
@@ -109,7 +109,7 @@ fields : [
         defineField({
             name: "status",
             title: "Status",
-            type: "sting",
+            type: "string",
             options: {
                 list: [
                     {title: "Pending", value: "pending"},
