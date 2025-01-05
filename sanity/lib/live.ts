@@ -19,5 +19,4 @@ export const { sanityFetch, SanityLive } = defineLive({
   fetchOptions: {
     revalidate: 0
   },
-
 })
