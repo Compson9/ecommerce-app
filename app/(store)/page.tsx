@@ -13,7 +13,6 @@ export default async function Home(){
       <div className="flex flex-col items-center justify-top h-screen bg-gray-100 p-20 ">
         <ProductView products={products} categories={categories} />
       </div>
-      <h1 className="text-xl">Banner Hero Section</h1>
     </div>
   )
 }
