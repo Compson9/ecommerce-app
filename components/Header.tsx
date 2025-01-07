@@ -20,7 +20,7 @@ export default function Header() {
 //     }
 
   return (
-    <header className="flex flex-wrap bg-blue-950 fixed w-full justify-between items-center py-4 px-6">
+    <header className="flex z-30 flex-wrap bg-blue-950 fixed w-full justify-between items-center py-4 px-6">
     {/* Top row of the Header */}
     <div className="flex w-full flex-wrap justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-gray-300 cursor-pointer mx-auto sm:mx-0">
