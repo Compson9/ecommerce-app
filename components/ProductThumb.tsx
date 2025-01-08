@@ -17,7 +17,7 @@ export default function ProductThumb({ product }: { product: Product }) {
               className="object-contain transition-transform duration-300 group-hover:scale-105"
               alt={product.name || "Product Image"}
               src={imageUrl(product.image).url()}
-              width={200} // Set a default width
+              width={300} // Set a default width
               height={200} // Set a default height
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
