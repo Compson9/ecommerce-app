@@ -15,7 +15,7 @@ export default function ProductView({ products,  }: ProductViewProps) {
             </div>
 
             {/* Products Fetch */}
-            <div className="flex-1">
+            <div className="">
                 <div>
                     <ProductGrid products={products} />
 

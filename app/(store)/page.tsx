@@ -10,7 +10,7 @@ export default async function Home(){
   return(
     <div className="pt-28 md:pt-32 lg:pt-32"> {/* Adjust padding to match header height */}
       {/* Render All products */}
-      <div className="flex flex-col items-center justify-top h-screen bg-gray-100 p-20 ">
+      <div className="flex flex-col items-center justify-top h-screen p-20 ">
         <ProductView products={products} categories={categories} />
       </div>
     </div>
