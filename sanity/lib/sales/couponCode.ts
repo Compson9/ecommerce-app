@@ -4,4 +4,4 @@ export const COUPON_CODES = {
     NY2022: "NY2022",
 } as const;
 
-export type CouponCode = typeof COUPON_CODES;
+export type CouponCode = keyof typeof COUPON_CODES;
