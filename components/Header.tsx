@@ -23,12 +23,12 @@ export default function Header() {
     <header className="flex z-30 flex-wrap bg-gray-900 fixed w-full justify-between items-center py-4 px-6">
     {/* Top row of the Header */}
     <div className="flex w-full flex-wrap justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-gray-300 cursor-pointer mx-auto sm:mx-0">
+        <Link href="/" className="text-2xl font-bold text-gray-400 cursor-pointer mx-auto sm:mx-0">
             NovaMart
         </Link>
         
 <Form action="/search" className="w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">   
-<div className="bg-white w-full flex px-1 py-1 rounded-full border border-blue-500 overflow-hidden ">
+<div className="bg-white w-full flex px-1 py-1 rounded-full border border-blue-100 overflow-hidden ">
         <input type='text' name="query" placeholder='Search for products...' className="w-full p2 outline-none bg-white pl-4 text-sm" />
         <button type='button'
           className="bg-gray-900 hover:bg-gray-800 transition-all text-white text-sm rounded-full px-5 py-2.5">Search</button>
