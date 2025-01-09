@@ -8,7 +8,7 @@ export default async function BlackFridayBanner() {
 
     if (!sale?.isActive) {
         return null;
-    }
+    } 
 
   return (
     <div>BlackFridayBanner</div>
