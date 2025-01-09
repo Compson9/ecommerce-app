@@ -34,7 +34,9 @@ export default function RootLayout({
       >
         <main className="">
           <Header/>
-        {children}
+          <div className="pt-20">
+          {children}
+          </div>
         </main>
         <SanityLive/>
       </body>
