@@ -361,6 +361,17 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
 // Variable: ACTIVE_SALE_BY_COUPON_QUERY
 // Query: *[            _type == "sales"             && isActive == true             && couponCode == $couponCode        ] | order(validFrom desc) [0]
 
+// export type ACTIVE_SALE_BY_COUPON_QUERYResult = {
+//   _id: string;
+//   _type: "sales";
+//   title?: string;
+//   discountAmount?: number;
+//   couponCode?: string;
+//   isActive?: boolean;
+//   validFrom?: string;
+//   validUntil?: string;
+//   // Add any other fields you expect from the sales document
+// } | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -368,5 +379,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n        *[_type == \"category\"] | order(name asc)\n        ": ALL_CATEGORIES_QUERYResult;
     "\n        *[_type == \"product\"] | order(name asc)\n        ": ALL_PRODUCTS_QUERYResult;
+    // "\n        *[\n            _type == \"sales\"\n             && isActive == true \n            && couponCode == $couponCode\n        ] | order(validFrom desc) [0]": ACTIVE_SALE_BY_COUPON_QUERYResult;
   }
 }
