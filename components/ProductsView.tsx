@@ -6,9 +6,6 @@ interface ProductViewProps {
     categories: Category[],
 }
 
-
-
-
 export default function ProductView({ products,  }: ProductViewProps) {
     return (
         <div className="flex flex-col">
@@ -18,7 +15,7 @@ export default function ProductView({ products,  }: ProductViewProps) {
             </div>
             {/* Products Fetch */}
             <div className="">
-                <div>
+                <div className="flex flex-col space-y-4">
                     <ProductGrid products={products} />
                     {/* <hr className="w-1/2 sm:w-3/4" /> */}
                 </div>
