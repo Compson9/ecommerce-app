@@ -11,6 +11,7 @@ export default async function BlackFridayBanner() {
       discountAmount: 50,
       validFrom: '2023-11-24',
       validUntil: '2023-11-27',
+      description: "Welcome to this years Largest Black Friday Sale"
     },
     // Add more mock sales data if needed
   ];
@@ -24,7 +25,19 @@ export default async function BlackFridayBanner() {
           <h2 className='text-3xl sm:text-5xl font-extrabold text-left mb-4'>
           {mockSalesData[0].title}
           </h2>
-          <p></p>
+          <p className='text-left text-xl sm:text-3xl font-semibold mb-6'>
+            {mockSalesData[0].description}
+          </p>
+          <div className='flex'>
+            <div className='bg-white text-black py-4 px-6 rounded-full shadow-md transform hover:scale-105 transition duration-300'>
+              <span className='font-bold text-base sm:text-xl text-red-600'>
+                {mockSalesData[0].couponCode}
+              </span>
+            <span className='ml-2 font-bold text-base sm:text-xl'>
+            for  {mockSalesData[0].discountAmount} % OFF
+            </span>
+            </div>
+          </div>
         </div>
 
       </div>
