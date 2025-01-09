@@ -10,7 +10,7 @@ export default async function Home(){
   const categories = (await getAllCategories()) || [];
 
   return(
-    <div className=""> 
+    <div className="bg-gray-50"> 
     <div className="lg:pt-4 pt-24">
     <BlackFridayBanner/>
     </div>
