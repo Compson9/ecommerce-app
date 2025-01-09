@@ -23,7 +23,7 @@ export default function Header() {
     <header className="flex z-30 flex-wrap bg-gray-900 fixed w-full justify-between items-center py-4 px-6">
     {/* Top row of the Header */}
     <div className="flex w-full flex-wrap justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-gray-400 cursor-pointer mx-auto sm:mx-0">
+        <Link href="/" className="text-2xl font-bold text-gray-200 cursor-pointer mx-auto sm:mx-0">
             NovaMart
         </Link>
         

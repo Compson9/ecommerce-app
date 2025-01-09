@@ -39,9 +39,7 @@ export default async function BlackFridayBanner() {
             </div>
           </div>
         </div>
-
       </div>
-      
       </div>
   )
 }
