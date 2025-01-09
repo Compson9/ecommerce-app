@@ -30,9 +30,13 @@ export default async function BlackFridayBanner() {
           </p>
           <div className='flex'>
             <div className='bg-white text-black py-4 px-6 rounded-full shadow-md transform hover:scale-105 transition duration-300'>
-              <span className='font-bold text-base sm:text-xl text-red-600'>
+              <span className='font-bold text-base sm:text-xl'> 
+                Use Code: {""}
+              <span className=' text-red-600'>
                 {mockSalesData[0].couponCode}
               </span>
+              </span>
+             
             <span className='ml-2 font-bold text-base sm:text-xl'>
             for  {mockSalesData[0].discountAmount} % OFF
             </span>
