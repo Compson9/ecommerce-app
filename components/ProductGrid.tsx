@@ -10,7 +10,7 @@ interface ProductGridProps {
 
 export default function ProductGrid({ products }: ProductGridProps) {
   return (
-    <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mx-[-56px] lg:mx-auto'>
+    <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 lg:gap-10 gap-4 mx-[-56px] lg:mx-auto'>
       {products?.map((product) => {
         return (
           <AnimatePresence key={product._id}>
