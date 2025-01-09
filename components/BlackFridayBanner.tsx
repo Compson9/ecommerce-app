@@ -36,7 +36,6 @@ export default async function BlackFridayBanner() {
                 {mockSalesData[0].couponCode}
               </span>
               </span>
-             
             <span className='ml-2 font-bold text-base sm:text-xl'>
             for  {mockSalesData[0].discountAmount} % OFF
             </span>
