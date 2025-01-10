@@ -30,7 +30,7 @@ export default async function ProductPage({params}: { params: Promise<{
             alt={product.name ?? "Product Image"}
             width={200}
             height={300}
-            className="object-contain transition-transform duration-300 hover:scale-105"
+            className="object-contain justify-center transition-transform duration-300 hover:scale-105"
             />
           )}
           {isOutOfStock && (

@@ -1,17 +1,18 @@
 import { Category, Product } from "@/sanity.types"
 import ProductGrid from "./ProductGrid"
+import { CategorySelectorComponent } from "./ui/category-selector"
 
 interface ProductViewProps {
     products: Product[],
     categories: Category[],
 }
 
-export default function ProductView({ products,  }: ProductViewProps) {
+export default function ProductView({ products, categories }: ProductViewProps) {
     return (
         <div className="flex flex-col">
             {/* Categories fetch */}
             <div className="w-full sm:w-[200px]">
-                {/* <CategorySelectorComponent categories={categories}/> */}
+                <CategorySelectorComponent categories={categories}/>
             </div>
             {/* Products Fetch */}
             <div className="">
