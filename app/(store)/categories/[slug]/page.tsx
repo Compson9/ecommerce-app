@@ -2,24 +2,31 @@ import ProductView from "@/components/ProductsView";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { getProductByCategory } from "@/sanity/lib/products/getProductByCategory";
 
-export default async function CategoryPage({params}: {params: Promise<{slug: string}>}) {
-    const {slug} = await params;
+export default async function CategoryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-    const products = await getProductByCategory(slug);
-    const categories = await getAllCategories();
+  const products = await getProductByCategory(slug);
+  const categories = await getAllCategories();
 
-    return (
-        <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
-            <div className="p-8 w-full max-w-4xl">
-                <h1 className="text-3xl font-bold mb-6 text-center">
-                    {slug
-                        .split("-")
-                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                        .join(" ")}{" "}
-                    Collection
-                </h1>
-                <ProductView products={products} categories={categories}/>
-            </div>
-        </div>
-    )
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <div className="container mx-auto px-4 lg:px-2 py-12">
+        {/* Page Header */}
+        <h1 className="text-3xl font-bold text-center mb-8">
+          {slug
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")}{" "}
+          Collection
+        </h1>
+
+        {/* Products and Categories */}
+        <ProductView products={products} categories={categories} />
+      </div>
+    </div>
+  );
 }

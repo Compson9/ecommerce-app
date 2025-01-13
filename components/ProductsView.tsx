@@ -16,7 +16,7 @@ export default function ProductView({ products, categories }: ProductViewProps) 
                 <CategorySelectorComponent categories={categories}/>
             </div>
             {/* Products Fetch */}
-            <div className="">
+            <div className="flex space-x-10 gap-24">
                 <div className="container mx-auto px-0">
                     <ProductGrid products={products} />
                     {/* <hr className="w-1/2 sm:w-3/4" /> */}
