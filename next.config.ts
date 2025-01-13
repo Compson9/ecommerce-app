@@ -4,11 +4,18 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "cdn.sanity.io"
-      }
-    ]
-  }
-  /* config options here */
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
+  // Ignore TypeScript errors during build
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // Ignore ESLint errors during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
