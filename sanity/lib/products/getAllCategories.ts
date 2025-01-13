@@ -4,15 +4,16 @@ import { sanityFetch } from "../live";
 export const getAllCategories = async () => {
     const ALL_CATEGORIES_QUERY = defineQuery(`
         *[_type == "category"] | order(name asc)
-        `);
-        try {
-            const products = await sanityFetch({
-                query: ALL_CATEGORIES_QUERY,
-            });
-            return products.data || [];
-        } catch (error) {
-            console.error("Error fetching products:",error)
-        }
+    `);
+    try {
+        const result = await sanityFetch({
+            query: ALL_CATEGORIES_QUERY,
+        });
 
+        // Ensure the result is an array
+        return result.data || [];
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        return []; // Return an empty array on error
+    }
 }
-

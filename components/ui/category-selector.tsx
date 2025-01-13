@@ -1,22 +1,3 @@
-// "use client"
-
-// import { Category } from "@/sanity.types"
-// import { useRouter } from "next/router";
-// import { useState } from "react";
-// import { cn } from "@/lib/utils"
-// import { Button } from "@/components/ui/button"
-
-
-
-// export default function CategorySelectorComponent({ categories }: CategorySelectorProps) {
-//     const [open, setOpen] = useState(false);
-//     const [value, setValue] = useState<string>("")
-//     const router = useRouter();
-
-    
-
-
-// }
 
 "use client"
 
@@ -39,29 +20,31 @@ import {
 } from "@/components/ui/popover"
 // import { useRouter } from "next/router"
 import { Category } from "@/sanity.types"
+import { useRouter } from "next/navigation"
+// import { useRouter } from "next/router"
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
+// const frameworks = [
+//   {
+//     value: "next.js",
+//     label: "Next.js",
+//   },
+//   {
+//     value: "sveltekit",
+//     label: "SvelteKit",
+//   },
+//   {
+//     value: "nuxt.js",
+//     label: "Nuxt.js",
+//   },
+//   {
+//     value: "remix",
+//     label: "Remix",
+//   },
+//   {
+//     value: "astro",
+//     label: "Astro",
+//   },
+// ]
 
 interface CategorySelectorProps {
     categories: Category[],
@@ -71,7 +54,7 @@ interface CategorySelectorProps {
 export function CategorySelectorComponent({categories}: CategorySelectorProps) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
-//   const router = useRouter();
+  const router = useRouter();
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -80,36 +63,54 @@ export function CategorySelectorComponent({categories}: CategorySelectorProps) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full max-w-full relative flex justify-center sm:justify-start sm:flex-none items-center bg-gray-800 hover:bg-gray-900  hover:text-white text-white font-bold py-2 rounded"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            ? categories.find((category) => category._id === value)?.title
+            : "Filter by Category"}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 " />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder="Search category" 
+          className="h-9"
+          onKeyDown={(e) => {
+            if(e.key === "Enter") {
+              const selectedCategory = categories.find((c)=> 
+              c.title
+              ?.toLowerCase()
+              .includes(e.currentTarget.value.toLowerCase())
+              );
+              if(selectedCategory?.slug?.current){
+                setValue(selectedCategory._id);
+                router.push(`/category/${selectedCategory.slug.current}`);
+                setOpen(false);
+              } 
+            }
+          }}
+          />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No Category Found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {categories.map((category) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
+                  key={category._id}
+                  value={category.title}
+                 onSelect={() => {
+                  setValue(value === category._id ? "" : category._id);
+                  router.push(`/categories/${category.slug?.current}`);
+                  setOpen(false);
+                 }}
                 >
+                  {category.title}
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      "ml-auto h-4 w-4",
+                      value === category._id ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {framework.label}
+                  {category.title}
                 </CommandItem>
               ))}
             </CommandGroup>
