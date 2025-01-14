@@ -1,5 +1,3 @@
-
-
 import AddToBasketButton from "@/components/AddToBasketButton";
 import { Button } from "@/components/ui/button";
 import { imageUrl } from "@/lib/imageUrl";
@@ -8,62 +6,54 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
 
-export default async function ProductPage({params}: { params: Promise<{
-    slug: string
-}>;
-}) {
-    const {slug} = await params;
-    const product = await getProductBySlug(slug)
+  if (!product) {
+    return notFound();
+  }
 
-    if(!product){
-        return notFound();
-    }
-    
-    const isOutOfStock = product.stock !== null && (product.stock ?? 0) <= 0;
+  const isOutOfStock = product.stock !== null && (product.stock ?? 0) <= 0;
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 mt-20 lg:mt-4 md:grid-cols-2 gap-8">
-        <div className={`relative aspect-square overflow-hidden rounded-lg , shadow-lg ${isOutOfStock ? "opacity-50" : ""} `}>
+      <div className="flex flex-col lg:flex-row items-center lg:items-start mt-20 lg:mt-4 gap-8">
+        <div className={`relative w-full max-w-sm lg:max-w-md aspect-square overflow-hidden rounded-lg shadow-lg ${isOutOfStock ? "opacity-50" : ""}`}>
           {product.image && (
             <Image
-            src={imageUrl(product.image).url()}
-            alt={product.name ?? "Product Image"}
-            width={200}
-            height={300}
-            className="object-contain justify-center transition-transform duration-300 hover:scale-105"
+              src={imageUrl(product.image).url()}
+              alt={product.name ?? "Product Image"}
+              width={400}
+              height={400}
+              className="object-contain transition-transform duration-300 hover:scale-105"
             />
           )}
           {isOutOfStock && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <span className="text-white font-bold text-lg">
-              Out Of Stock
-              </span>
+              <span className="text-white font-bold text-lg">Out Of Stock</span>
             </div>
           )}
         </div>
 
-          <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between w-full max-w-lg">
           <div>
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <div className="text-xl font-semibold mb-4">
-          ${product.price?.toFixed(2)}
+            <h1 className="text-3xl font-bold mb-4 text-center lg:text-left">{product.name}</h1>
+            <div className="text-xl font-semibold mb-4 text-center lg:text-left">
+              ${product.price?.toFixed(2)}
+            </div>
+            <div className="prose max-w-none mb-6 text-center lg:text-left">
+              {Array.isArray(product.description) && (
+                <PortableText value={product.description} />
+              )}
+            </div>
           </div>
-          <div className="prose max-w-none mb-6">
-            {Array.isArray(product.description) && (
-            <PortableText value={product.description}/> 
-          )}
-          </div>
-          </div>
-          <div className="mt-6">
+          <div className="mt-6 flex justify-center lg:justify-start">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
-          <Button>Add to Cart</Button>
+            <Button className="ml-4">Add to Cart</Button>
           </div>
-
-          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }
-
