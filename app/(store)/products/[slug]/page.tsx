@@ -1,5 +1,7 @@
 
 
+import AddToBasketButton from "@/components/AddToBasketButton";
+import { Button } from "@/components/ui/button";
 import { imageUrl } from "@/lib/imageUrl";
 import { getProductBySlug } from "@/sanity/lib/products/getProductBySlug";
 import { PortableText } from "next-sanity";
@@ -22,7 +24,7 @@ export default async function ProductPage({params}: { params: Promise<{
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 mt-20 lg:mt-4 md:grid-cols-2 gap-8">
         <div className={`relative aspect-square overflow-hidden rounded-lg , shadow-lg ${isOutOfStock ? "opacity-50" : ""} `}>
           {product.image && (
             <Image
@@ -46,14 +48,19 @@ export default async function ProductPage({params}: { params: Promise<{
           <div>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
           <div className="text-xl font-semibold mb-4">
-          {product.price?.toFixed(2)}
+          ${product.price?.toFixed(2)}
           </div>
           <div className="prose max-w-none mb-6">
-            {Array.isArray(product.description) &&
-            <PortableText value={product.description}/>
-            }
+            {Array.isArray(product.description) && (
+            <PortableText value={product.description}/> 
+          )}
           </div>
           </div>
+          <div className="mt-6">
+            <AddToBasketButton product={product} disabled={isOutOfStock} />
+          <Button>Add to Cart</Button>
+          </div>
+
           </div>
       </div>
     </div>
