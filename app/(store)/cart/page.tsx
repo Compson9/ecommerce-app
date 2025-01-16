@@ -27,7 +27,7 @@ export default function CartPage(){
     }
 
     return (
-        <div className="container mx-auto p-4 max-w-6xl">
+        <div className="container mt-24 md:mt-2 xl:mt-2 lg:mt-2 mx-auto p-4 max-w-6xl">
             <h1 className="font-bold mb-4 text-2xl">Your Cart</h1>
             <div className="flex flex-col lg:flex-row gap-8">
                 <div className="flex-grow">
@@ -64,7 +64,7 @@ export default function CartPage(){
                                 </p>
                             </div>
                             </div>
-                            
+
                             <div className="flex items-center ml-4 flex-shrink-0">
                                 <AddToBasketButton product={item.product}/>
                             </div>
