@@ -4,15 +4,22 @@ import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store/store"
-import { SignInButton, useAuth, } from "@clerk/nextjs";
+import { SignInButton, useAuth, useUser, } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+export type Metadata = {
+    orderNumber: string;
+    customerName: string;
+    customerEmail: string;
+    clerkUserId: string;
+}
+
 export default function CartPage(){
     const groupItems = useBasketStore((state)=> state.getGroupedItems());
     const {isSignedIn} = useAuth();
-    // const {user} = useUser();
+    const {user} = useUser();
     const router = useRouter();
 
     const [isClient, setIsClient] = useState(false);
@@ -39,7 +46,26 @@ export default function CartPage(){
     async function handleCheckout(){
         if(!isSignedIn){
             return setIsLoading(true)
+        }
 
+        try {
+        const metadata: Metadata ={
+                orderNumber: crypto.randomUUID(),
+                customerName: user?.fullName ?? "Unknown",
+                customerEmail: user?.emailAddresses[0].emailAddress ?? "Unknown",
+                clerkUserId: user!.id,
+            };
+
+            const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+
+            if(checkoutUrl){
+                window.location.href = checkoutUrl;
+            }
+        } catch (error) {
+            console.error("Error checking out", error)
+            
+        } finally {
+            setIsLoading(false)
         }
 
     }
