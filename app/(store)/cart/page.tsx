@@ -4,7 +4,7 @@ import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store/store"
-import { useAuth, useUser } from "@clerk/nextjs";
+import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -34,6 +34,11 @@ export default function CartPage(){
                 <p className="text-gray-600 text-lg">Your Cart is Empty</p>
             </div>
         )
+    }
+
+    async function handleCheckout(){
+
+
     }
 
     return (
@@ -99,6 +104,22 @@ export default function CartPage(){
                         </span>
                         </p>
                     </div>
+                    {isSignedIn ? (
+                        <button className="mt-4 w-full ng-blue-500 text-white px-4 py-4 rounded bg-gray-900  hover:bg-gray-800 disabled:bg-gray-400"
+                        onClick={handleCheckout}
+                        >
+                            {isLoading ? "processing..." : "checkout"}
+                        </button>
+
+                    ): (
+                        <SignInButton mode="modal">
+                            <button className="mt-4 w-full bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-800">
+                            Sign in to Checkout
+                            </button>
+                        </SignInButton>
+
+                    )}
+
                 </div>
 
                 {/* space for fixed checkout on mobile  */}
