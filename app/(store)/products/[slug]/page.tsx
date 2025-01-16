@@ -1,5 +1,5 @@
 import AddToBasketButton from "@/components/AddToBasketButton";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { imageUrl } from "@/lib/imageUrl";
 import { getProductBySlug } from "@/sanity/lib/products/getProductBySlug";
 import { PortableText } from "next-sanity";
@@ -40,7 +40,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div>
             <h1 className="text-3xl font-bold mb-4  lg:text-left">{product.name}</h1>
             <div className="text-xl font-semibold mb-4  lg:text-left">
-              GHS{product.price?.toFixed(2)}
+            <span>&#8373;</span> {product.price?.toFixed(2)}
             </div>
             <div className="prose max-w-none mb-6 lg:text-left">
               {Array.isArray(product.description) && (
