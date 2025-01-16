@@ -13,7 +13,7 @@ export default async function CategoryPage({
   const categories = await getAllCategories();
 
   return (
-    <div className="bg-gray-50 mt-16 mx-20 lg:mx-auto lg:mt-2 min-h-screen">
+    <div className=" mt-16 mx-14 lg:mx-auto lg:mt-2 min-h-screen">
       <div className="container mx-auto px-4 lg:px-2 py-12">
         {/* Page Header */}
         <h1 className="text-3xl font-bold text-center mb-2">
