@@ -1,12 +1,13 @@
 "use client"
 
 import AddToBasketButton from "@/components/AddToBasketButton";
+import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store/store"
 import { useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CartPage(){
     const groupItems = useBasketStore((state)=> state.getGroupedItems());
@@ -14,8 +15,16 @@ export default function CartPage(){
     const {user} = useUser();
     const router = useRouter();
 
-    const [isClinent, setIsClient] = useState(false);
+    const [isClient, setIsClient] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    
+    useEffect(()=> {
+        setIsClient(true);
+    },[])
+
+    if(!isClient){
+        return <Loader/>
+    }
 
     if(groupItems.length === 0){
         return (
