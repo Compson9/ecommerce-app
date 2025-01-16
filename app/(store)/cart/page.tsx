@@ -37,7 +37,10 @@ export default function CartPage(){
     }
 
     async function handleCheckout(){
+        if(!isSignedIn){
+            return setIsLoading(true)
 
+        }
 
     }
 

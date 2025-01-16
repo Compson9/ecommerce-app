@@ -13,10 +13,10 @@ export default async function CategoryPage({
   const categories = await getAllCategories();
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 mt-16 mx-20 lg:mx-auto lg:mt-2 min-h-screen">
       <div className="container mx-auto px-4 lg:px-2 py-12">
         {/* Page Header */}
-        <h1 className="text-3xl font-bold text-center mb-8">
+        <h1 className="text-3xl font-bold text-center mb-2">
           {slug
             .split("-")
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
