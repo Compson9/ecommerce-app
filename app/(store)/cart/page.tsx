@@ -4,7 +4,7 @@ import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useBasketStore from "@/store/store"
-import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
+import { SignInButton, useAuth, } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 export default function CartPage(){
     const groupItems = useBasketStore((state)=> state.getGroupedItems());
     const {isSignedIn} = useAuth();
-    const {user} = useUser();
+    // const {user} = useUser();
     const router = useRouter();
 
     const [isClient, setIsClient] = useState(false);
