@@ -5,9 +5,13 @@ import Link from "next/link";
 import Form from "next/form";
 import { PackageIcon,  TrolleyIcon } from "@sanity/icons";
 import { SignedIn } from "@clerk/clerk-react";
+import useBasketStore from "@/store/store";
 
 
 export default function Header() {
+  const itemCount = useBasketStore((state)=> 
+  state.items.reduce((total, item) => total + item.quantity, 0)
+  )
     const {user} = useUser();
 //     const createClerkPasskey = async() => {
 //  try {
@@ -35,19 +39,6 @@ export default function Header() {
       </div>
 </Form>
 
-        {/* <Form
-            action="/search" 
-            classNameNameName="w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0"
-            
-        >
-          
-            <input
-                type="text"
-                name="query"
-                placeholder="Search for products"
-                classNameNameName="bg-gray-300 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 border w-full max-w-4xl" />
-            
-        </Form> */}
 
  {/* Left side of the header */}
 
@@ -58,6 +49,9 @@ export default function Header() {
         >
             <TrolleyIcon className="w-6 h-6"/>
             {/* Span items count when the global state is implemented */}
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+              {itemCount}
+            </span>
             <span>Cart</span>
         </Link>
         
@@ -86,15 +80,6 @@ export default function Header() {
             </div>
            
            )}
-           {/* User Pass Key */}
-          {/* {user?.passkeys.length === 0 && (
-            <button
-            onClick={createClerkPasskey}
-              className="bg-white hover:bg-blue-700 text-blue-500 hover:text-white animate-pulse font-bold py-2 px-2 border-blue-300 border"
-            >
-             Create passkey 
-            </button>
-          )} */}
 
         </ClerkLoaded>
         </div>

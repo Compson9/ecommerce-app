@@ -48,9 +48,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               )}
             </div>
           </div>
-          <div className="mt-6 flex justify-center lg:justify-start">
+          <div className="mt-6 ">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
-            <Button className="ml-4">Add to Cart</Button>
+            {/* <Button className="ml-4">Add to Cart</Button> */}
           </div>
         </div>
       </div>
