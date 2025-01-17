@@ -1,5 +1,6 @@
 "use client"
 
+import { Metadata } from "@/actions/createCheckOutSession";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
@@ -9,12 +10,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export type Metadata = {
-    orderNumber: string;
-    customerName: string;
-    customerEmail: string;
-    clerkUserId: string;
-}
 
 export default function CartPage(){
     const groupItems = useBasketStore((state)=> state.getGroupedItems());
@@ -56,7 +51,7 @@ export default function CartPage(){
                 clerkUserId: user!.id,
             };
 
-            const checkoutUrl = await createCheckoutSession(groupedItems, metadata);
+            const checkoutUrl = await createCheckoutSession(groupItems, metadata);
 
             if(checkoutUrl){
                 window.location.href = checkoutUrl;
@@ -81,7 +76,7 @@ export default function CartPage(){
                         >
                             {/* Contains the image on the cart page */}
 
-                            {/* Parent div  */}
+                            
                             <div className="flex items-center cursor-pointer flex-2 min-w-0"
                             onClick={()=> 
                                 router.push(`/products/${item.product.slug?.current}`)
