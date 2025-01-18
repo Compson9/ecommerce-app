@@ -28,9 +28,9 @@ export async function createCheckOutSession(
         }
 
         // Determine the base URL
-        const baseUrl = process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
-            : process.env.NEXT_PUBLIC_BASE_URL;
+        // const baseUrl = process.env.VERCEL_URL
+        //     ? `https://${process.env.VERCEL_URL}`
+        //     : process.env.NEXT_PUBLIC_BASE_URL;
 
         // Check for existing customer email
         const customers = await stripe.customers.list({
@@ -43,12 +43,22 @@ export async function createCheckOutSession(
             customerId = customers.data[0].id;
         }
 
-        // Success Url
-      const successUrl = `${`${process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`}` || process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`
-        
-      const cancelUrl = `${`${process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`}` || process.env.NEXT_PUBLIC_BASE_URL}/cart`
+        const baseUrl = process.env.NODE_ENV === "production" ? `https://${process.env.VERCEL_URL}`: `${process.env.NEXT_PUBLIC_BASE_URL}`;
 
-      console.log("SucCess URL <<<<<<<<<", successUrl);
+        const successUrl = `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`;
+
+        const cancelUrl = `${baseUrl}/cart`;
+
+        console.log("SUCCESS URL <<<<<<", successUrl, cancelUrl);
+        console.log("CANCEL URL <<<<<<", cancelUrl)
+        
+
+        // Success Url
+    //   const successUrl = `${`${process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`}` || process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`
+      
+    //   const cancelUrl = `${`${process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`}` || process.env.NEXT_PUBLIC_BASE_URL}/cart`
+
+    //   console.log("SucCess URL <<<<<<<<<", successUrl);
       
     
 
