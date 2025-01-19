@@ -12,19 +12,24 @@ export async function POST(req: NextRequest){
     const headersList = await headers();
     const sig = headersList.get("stripe-signature");
 
+    console.log("HIT WEBHOOK");
+    
+
     if(!sig){
         return NextResponse.json({error: "No signature found"}, {status: 400})
     }
+
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
     if(!webhookSecret){
-        return NextResponse.json({error: "No webhook secret found"}, {status: 400})
+        console.log("No webhook secret is specified")
+        return NextResponse.json({error: "No webhook secret found"}, {status: 400});
     }
 
-    let event: Stripe.Event
+    let event: Stripe.Event;
 
     try {
-        event = stripe.webhooks.constructEvent(body, sig, webhookSecret)
+        event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     } catch (error) {
         console.log("Webhook signature verification failed", error);
         return NextResponse.json({error:   `Webhook Error: ${error}`}, 
@@ -33,7 +38,6 @@ export async function POST(req: NextRequest){
 
     if(event.type === "checkout.session.completed"){
         const session = event.data.object as Stripe.Checkout.Session;
-
         try {
             const  order = await createOrderInSanity(session);
             console.log("Order created in Sanity", order);
@@ -41,7 +45,6 @@ export async function POST(req: NextRequest){
             console.log("Error creating order in Sanity", error);
             return NextResponse.json({error: `Error creating order: ${error}`},
                 {status: 500});
-    
         }
     }
 
@@ -59,7 +62,7 @@ async function createOrderInSanity(session: Stripe.Checkout.Session){
         payment_intent,
         customer,
         total_details
-    } =session;
+    } = session;
 
     // Create an order in your own database or Sanity CMS here
     const {orderNumber, customerName, customerEmail, clerkUserId} = metadata as Metadata;
@@ -75,7 +78,8 @@ async function createOrderInSanity(session: Stripe.Checkout.Session){
         product: {
             _type: "reference",
             _ref: (item.price?.product as Stripe.Product)?.metadata?.id
-        }
+        },
+        quantity: item.quantity || 0,
      }));
 
      const order = await backendClient.create({
