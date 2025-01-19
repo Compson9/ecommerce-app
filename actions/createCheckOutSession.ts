@@ -53,18 +53,6 @@ export async function createCheckOutSession(
         console.log("CANCEL URL <<<<<<", cancelUrl)
         
 
-        // Success Url
-    //   const successUrl = `${`${process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`}` || process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`
-      
-    //   const cancelUrl = `${`${process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`}` || process.env.NEXT_PUBLIC_BASE_URL}/cart`
-
-    //   console.log("SucCess URL <<<<<<<<<", successUrl);
-      
-    
-
-
-        
-
         // Create a checkout session
         const session = await stripe.checkout.sessions.create({
             customer: customerId,

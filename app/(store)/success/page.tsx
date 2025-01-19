@@ -70,7 +70,6 @@ export default function SuccessPage(){
                     } */}
             </div>
         </div>
-
         <div className="space-y-4">
             <p className="text-gray-600">
                 A confirmation mail had been sent to your email address.
