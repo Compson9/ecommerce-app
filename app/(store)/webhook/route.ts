@@ -59,7 +59,7 @@ async function createOrderInSanity(session: Stripe.Checkout.Session){
         payment_intent,
         customer,
         total_details
-    } = session;
+    } =session;
 
     // Create an order in your own database or Sanity CMS here
     const {orderNumber, customerName, customerEmail, clerkUserId} = metadata as Metadata;
