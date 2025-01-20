@@ -12,7 +12,7 @@ export async function POST(req: NextRequest){
     const headersList = await headers();
     const sig = headersList.get("stripe-signature");
 
-    console.log("HIT WEBHOOK");
+    
     
 
     if(!sig){
