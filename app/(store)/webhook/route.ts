@@ -12,9 +12,6 @@ export async function POST(req: NextRequest){
     const headersList = await headers();
     const sig = headersList.get("stripe-signature");
 
-    
-    
-
     if(!sig){
         return NextResponse.json({error: "No signature found"}, {status: 400})
     }

@@ -1,3 +1,4 @@
+import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
 import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
 
@@ -12,7 +13,7 @@ export default async function ordersPage(){
         return redirect("/")
     }
 
-    const orders = await getMyorders(userId);
+    const orders = await getMyOrders(userId);
 
 
     
