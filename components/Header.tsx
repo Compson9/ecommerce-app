@@ -58,7 +58,7 @@ export default function Header() {
         {/* User profile on the navbar */}
         <ClerkLoaded>
           <SignedIn>
-            <Link href="/order" 
+            <Link href="/orders" 
             className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 font-bold py-2 px-4 rounded  bg-white hover:bg-gray-800 hover:text-white hover:border text-bl"
             >
               <PackageIcon className="w-6 h-6"/>
