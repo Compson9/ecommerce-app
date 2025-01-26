@@ -1,32 +1,27 @@
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "../live";
+import { backendClient } from "@/sanity/lib/backendClient";
 
-export async function getMyOrders(userId: string){
-    if(!userId){
-        throw new Error("Not authenticated")
+export async function getMyOrders(userId: string) {
+  if (!userId) {
+    throw new Error("Not authenticated");
+  }
+
+  // Define a query to get orders by user id
+  const My_ORDERS_QUERY = `
+    *[_type == "order" && clerkUserId == $userId] | order(orderDate desc){
+      ...,
+      products[]{
+        ...
+      }
     }
+  `;
 
-    // define a query to get orders by user id
-    const My_ORDERS_QUERY = defineQuery( `
-        *[_type == "order" && clerkUserId == $userId] | order(orderDate desc){
-            ...,
-            products[]{
-                ...,
-                product->
-            }}
-        `);
-
-        try {
-            // use sanity fetch to query order
-            const orders = await sanityFetch({
-                query: My_ORDERS_QUERY,
-                params: {userId}
-            });
-            return orders.data || [];
-
-            
-        } catch (error) {
-            console.log("Error fetching orders", error);
-            throw new Error("Error while fetching orders")
-        }
+  try {
+    // Use sanity fetch to query order
+    const orders = await backendClient.fetch(My_ORDERS_QUERY, { userId });
+    console.log("Fetched orders:", orders); // Log fetched orders
+    return orders || [];
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw new Error("Error fetching orders");
+  }
 }
