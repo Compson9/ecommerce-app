@@ -1,4 +1,5 @@
 import AddToBasketButton from "@/components/AddToBasketButton";
+import AddToCartButton from "@/components/AddToCartButton";
 // import { Button } from "@/components/ui/button";
 import { imageUrl } from "@/lib/imageUrl";
 import { getProductBySlug } from "@/sanity/lib/products/getProductBySlug";
@@ -48,9 +49,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               )}
             </div>
           </div>
-          <div className="mt-6 ">
+          <div className="mt-6 flex items-center justify-center lg:justify-start space-x-12 ">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
-            {/* <Button className="ml-4">Add to Cart</Button> */}
+            <AddToCartButton product={product} disabled={isOutOfStock}/>
           </div>
         </div>
       </div>
