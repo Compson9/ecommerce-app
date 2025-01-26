@@ -280,10 +280,10 @@ export type SanityImageMetadata = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./sanity/lib/orders/getMyOrders.ts
-// Variable: My_ORDERS_QUERY
-// Query: *[_type == "order" && clerkUserId == $userId] | order(orderDate desc){            ...,            products[]{                ...,                product->            }}
-export type My_ORDERS_QUERYResult = Array<{
+// Source: ./sanity/lib/orders/getMyOrders.tsx
+// Variable: MY_ORDERS_QUERY
+// Query: *[_type == "order" && userId == $userId] | order(orderDate, desc){     ...,      products[]{       ...,        product->      }    }
+export type MY_ORDERS_QUERYResult = Array<{
   _id: string;
   _type: "order";
   _createdAt: string;
@@ -636,7 +636,7 @@ export type PRODUCT_SEARCH_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n        *[_type == \"order\" && clerkUserId == $userId] | order(orderDate desc){\n            ...,\n            products[]{\n                ...,\n                product->\n            }}\n        ": My_ORDERS_QUERYResult;
+    "\n    *[_type == \"order\" && userId == $userId] | order(orderDate, desc){\n     ...,\n      products[]{\n       ...,\n        product->\n      }\n    }\n    ": MY_ORDERS_QUERYResult;
     "\n        *[_type == \"category\"] | order(name asc)\n    ": ALL_CATEGORIES_QUERYResult;
     "\n        *[_type == \"product\"] | order(name asc)\n        ": ALL_PRODUCTS_QUERYResult;
     "\n        *[\n            _type == \"product\"\n            && references(*[_type == \"category\" && slug.current == $categorySlug]._id)\n        ] | order(name asc)\n    ": PRODUCTS_BY_CATEGORY_QUERYResult;
