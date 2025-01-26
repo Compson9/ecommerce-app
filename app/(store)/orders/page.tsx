@@ -1,3 +1,4 @@
+import { formatCurrency } from "@/lib/formatCurrency";
 import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
 import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
@@ -71,7 +72,22 @@ export default async function ordersPage(){
                                 </p>
                             </div>
                             </div>
+                            {order.amountDiscount ? (
+                                <div className="mt-4 p-3 sm:p-4  rounded-lg bg-gray-50">
+                                    <p className="text-sm text-gray-600">
+                                        Discount Applied: {" "}
+                                    </p>
+                                 <p className="text-sm text-gray-600">
+                                        Original Subtotal:{" "}
+                                       {formatCurrency(
+                                        (order.totalPrice ?? 0) + order.amountDiscount, order.currency
+                                       )}
+                                    </p>
+                                </div>
+                            ): null}
                             </div>
+
+                            
                         ))}
                         
                     </div>
